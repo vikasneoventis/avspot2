@@ -1,0 +1,89 @@
+NWDthemes.com - Slider Revolution Responsive Magento 2 Extension
+
+
+28 October 2016
+-----------------
+Version 5.2.6.3
+
+
+New Features:
+
+ * Add to cart action added to layer actions for product based sliders
+
+Changes:
+
+ * Disabled autoload when checking for class existance
+ * Removed unused WMPL related code
+
+Bugfixes:
+
+ * Fixed error on saving custom slider preset
+
+
+
+14 October 2016
+-----------------
+Version 5.2.6.2
+
+
+Bugfixes:
+
+ * Forced https protocol on sliders thumbnails urls
+ * Fixed ajax error bug when saving slide after duplicating layer
+ * Removed deprecated characters from name attribute in backend layout
+ * Fix for missing title attribute in ACL resource
+ * Fix for undefined function error warning when importing template online
+
+
+
+1 September 2016
+-----------------
+Version 5.2.6.1
+
+
+New Features:
+
+ * Positioned manual animation timing dialog to layer it was called for
+
+Changes:
+
+ * Setting default font family if not specified on captions saving
+ * Updated translation functions calls
+ * Minified addons scripts
+ * Removed depricated use of old Magento helpers
+
+Bugfixes:
+
+ * Fixed bug with importing template sliders for databases with custom table prefix
+ * Fixed bug with edit layers timeline split text time incorrectly added to each layer
+ * Fix for add slider enter title dialog displaying under templates shop dialog
+ * Fix for showing all hidden dialogs after image inserting
+ * Fix for delete confirmation popover displaying under select image slide out dialog
+ * Fix for guide lines zindex issue with save styles dropdown
+ * Fix for color picker edit field zindex
+ * Fix for preview captions after inserting new caption style
+ * Fix for navigation save function
+ * Fix for saving css captions
+ * Fix for dialog zIndex problems
+ * Fix for javascript error on slide editor
+ * Fix for color picker edit field
+ * Fix for not showing inline css template and layer dialogs
+ * Fix for media gallery dialog z-index issue
+ * Fixed typo in video settings autoplay option
+ * Fix for audio mp3 layer in slide editor. Fix for whiteboard addon
+ * Fixed error with backup addons
+ * Fix for left arrow override
+ * Fix for svg import from template
+ * Fix for product based slider slide links
+ * Fix for product based view link, prices and preview
+
+
+
+28 July 2016
+-----------------
+Version 5.2.6
+
+
+New Features:
+
+ * Slider Revolution Magento 2 Extension Version Created!

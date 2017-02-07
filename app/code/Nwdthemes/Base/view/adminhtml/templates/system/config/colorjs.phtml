@@ -1,0 +1,17 @@
+<script>
+require(['jquery', 'jquery/colorpicker/js/colorpicker'], function($){
+    $(document).ready(function () {
+        $('.nwd_color').each(function(){
+            var $el = $(this);
+            $el.css("backgroundColor", $el.val());
+
+            $el.ColorPicker({
+                color: $el.val(),
+                onChange: function (hsb, hex, rgb) {
+                    $el.css("backgroundColor", "#" + hex).val("#" + hex);
+                }
+            });
+        });
+    });
+});
+</script>
