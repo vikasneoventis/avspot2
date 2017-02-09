@@ -3,15 +3,14 @@
     <head>
         <css src="M2express_Foundation6::css/foundation.min.css"/>
         <css src="M2express_Foundation6::css/app.css"/>
+        <script src="M2express_Foundation6::js/vendor/jquery.js"/>
         <script src="M2express_Foundation6::js/vendor/what-input.js"/>
         <script src="M2express_Foundation6::js/vendor/foundation.js"/>
-        <script src="M2express_Foundation6::js/app.js"/>
+        <!--<script src="M2express_Foundation6::js/app.js"/>-->
     </head>
     <body>
-        <!--<referenceContainer name="footer-container">
-            <script src="M2express_Foundation6::js/vendor/what-input.js"/>
-            <script src="M2express_Foundation6::js/vendor/foundation.js"/>
-            <script src="M2express_Foundation6::js/app.js"/>
-        </referenceContainer>-->
+        <referenceContainer name="before.body.end">
+            <block class="\Magento\Framework\View\Element\Template" template="M2express_Foundation6::foundation6/body_end.phtml" name="before_body_end_js"/>
+        </referenceContainer>
     </body>
 </page>
