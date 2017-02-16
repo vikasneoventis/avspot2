@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Cron/etc/crontab.xsd">
+    <group id="default">
+        <job name="aheadworks_followupemail_cron" instance="Aheadworks\Followupemail\Model\Cron" method="run">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+        <job name="aheadworks_followupemail_clearLog" instance="Aheadworks\Followupemail\Model\Cron" method="runDaily">
+            <schedule>0 0 * * *</schedule>
+        </job>
+    </group>
+</config>

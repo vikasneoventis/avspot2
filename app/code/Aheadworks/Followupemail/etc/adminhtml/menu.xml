@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Aheadworks_Followupemail::home" title="Follow Up Email by aheadWorks" module="Aheadworks_Followupemail" sortOrder="100" parent="Magento_Backend::marketing" resource="Aheadworks_Followupemail::home"/>
+        <add id="Aheadworks_Followupemail::home_events" title="Events" module="Aheadworks_Followupemail" sortOrder="1" parent="Aheadworks_Followupemail::home" action="followupemail_admin/event/index" resource="Aheadworks_Followupemail::home_events"/>
+        <add id="Aheadworks_Followupemail::mail_log" title="Mail Log" module="Aheadworks_Followupemail" sortOrder="2" parent="Aheadworks_Followupemail::home" action="followupemail_admin/queue/index" resource="Aheadworks_Followupemail::mail_log"/>
+    </menu>
+</config>

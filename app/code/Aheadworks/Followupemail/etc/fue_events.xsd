@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="event" type="event" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniqueGroupId">
+            <xs:annotation>
+                <xs:documentation>
+                    Event type must be unique.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="event"/>
+            <xs:field xpath="@code"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="event">
+        <xs:sequence>
+            <xs:element name="enabled" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="model" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="customer_conditions" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="cart_conditions" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="product_conditions" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="order_statuses_condition" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="allowed_for_guests" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="typeId" use="required" />
+    </xs:complexType>
+
+    <xs:simpleType name="typeId">
+        <xs:annotation>
+            <xs:documentation>
+                Event type attribute can have only [a-z0-9_].
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z0-9_]+" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

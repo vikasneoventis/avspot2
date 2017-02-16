@@ -1,0 +1,28 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/** @var \Aheadworks\Followupemail\Block\Adminhtml\Event\Home $block */
+?>
+<?php foreach ($block->getEventTypes() as $eventType): ?>
+<section class="admin__page-section">
+    <div class="admin__page-section-title"></div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item" style="float: left; width: calc( (100%) * 0.25 - 30px );">
+            <div class="admin__page-section-item-title aheadworks-fue-home-event-title">
+                <span class="title"><?php echo $eventType['title'] ?></span>
+            </div>
+            <div class="admin__page-section-item-content aheadworks-fue-home-event-desc">
+                <div><?php echo $eventType['description'] ?></div>
+            </div>
+        </div>
+        <div class="admin__page-section-item" style="float: right; width: calc( (100%) * 0.75 - 30px );">
+            <div class="admin__page-section-item-content">
+                <div id="folloup_event_grid_<?php echo $eventType['code'] ?>"><?php echo $block->getGridHtml($eventType['code']) ?></div>
+            </div>
+        </div>
+    </div>
+</section>
+<?php endforeach; ?>

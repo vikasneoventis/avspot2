@@ -1,0 +1,34 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/* @var $block Aheadworks\Followupemail\Block\Adminhtml\Event\Edit\Tab\Renderer\SendEmail */
+$element = $block->getElement();
+$note = $element->getNote() ? '<div class="note">' . $element->getNote() . '</div>' : '';
+
+
+$fieldId = ($element->getHtmlId()) ? ' id="attribute-' . $element->getHtmlId() . '-container"' : '';
+$fieldClass = "field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ' with-addon';
+$fieldClass .= ($element->getRequired()) ? ' required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldAttributes = $fieldId . ' class="' . $fieldClass . '" '
+    . $block->getUiId('form-field', $element->getId());
+?>
+<?php if (!$element->getNoDisplay()): ?>
+    <div<?php echo $fieldAttributes ?> data-attribute-code="<?php echo $element->getHtmlId() ?>"
+                                       data-apply-to="<?php echo $block->escapeHtml($this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode([]))?>"
+    >
+        <?php echo $element->getLabelHtml() ?>
+        <div class="control">
+            <div>
+                <?php echo $element->getElementHtml() ?>&nbsp;<?php echo __('days');
+                if (!$block->isDaysOnly()) : ?>&nbsp;<?php echo $block->getHoursSelectorHtml() ?>&nbsp;<?php echo $block->getMinutesSelectorHtml(); endif;
+                ?>&nbsp;<?php echo $block->getAfterLabel() ?>
+                <?php echo $note ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

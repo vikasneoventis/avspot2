@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="sample_data.xsd">
+    <event>
+        <event_type>abandoned_checkout</event_type>
+        <name>Offering assistance (1 hour)</name>
+        <subject>Thanks for visiting {{var store.name}}!</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Dear {{var customer.firstname}},</h3>
+<p>We’ve noticed you left a shopping cart behind and we are wondering if anything went wrong. Please let us know if we could be of assistance and feel free to contact us for any additional information.</p>
+<p><strong style="text-transform: uppercase;">Cart items:</strong></p>
+<ul>
+{{for item in quote.getAllVisibleItems()}}
+<li>{{var item.qty}} x <a href="{{store url="catalog/product/view" id="$item.product_id"}}">{{var item.name}}</a></li>
+{{/for}}
+</ul>
+<p><strong style="text-transform: uppercase;">Cart subtotal:</strong> {{var quote.subtotal|formatPrice}}</p>
+<p>Follow this link to complete the purchase: <a href="{{store url=""}}/">{{var store.name}}</a></p>
+<p>Thanks for visiting our store and hope to see you soon!</p>]]>
+        </content>
+        <email_send_hours>1</email_send_hours>
+    </event>
+    <event>
+        <event_type>abandoned_checkout</event_type>
+        <name>Friendly reminder (23 hours)</name>
+        <subject>Your cart is waiting at {{var store.name}}!</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer.firstname}},</h3>
+<p>We’ve kept your cart intact, so there is still a chance to pick up where we left off! </p>
+<p><strong style="text-transform: uppercase;">Cart items:</strong></p>
+<ul>
+{{for item in quote.getAllVisibleItems()}}
+<li>{{var item.qty}} x <a href="{{store url="catalog/product/view" id="$item.product_id"}}">{{var item.name}}</a></li>
+{{/for}}
+</ul>
+<p><strong style="text-transform: uppercase;">Cart subtotal:</strong> {{var quote.subtotal|formatPrice}}</p>
+<p>Follow this link to complete the purchase: <a href="{{store url=""}}/">{{var store.name}}</a></p>
+<p>Meanwhile, feel free to visit {{var store.name}} and see what else we’ve got!</p>]]>
+        </content>
+        <email_send_hours>23</email_send_hours>
+    </event>
+    <event>
+        <event_type>abandoned_checkout</event_type>
+        <name>[Expiration] Last call (71 hours)</name>
+        <subject>Your cart at {{var store.name}} is about to expire!</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer.firstname}},</h3>
+<p>We’re afraid to tell you that your cart will expire in less than 24 hours. Hurry up if you want to find it in one piece!</p>
+<p><strong style="text-transform: uppercase;">Cart items:</strong></p>
+<ul>
+{{for item in quote.getAllVisibleItems()}}
+<li>{{var item.qty}} x <a href="{{store url="catalog/product/view" id="$item.product_id"}}">{{var item.name}}</a></li>
+{{/for}}
+</ul>
+<p><strong style="text-transform: uppercase;">Cart subtotal:</strong> {{var quote.subtotal|formatPrice}}</p>
+<p>Follow this link to complete the purchase: <a href="{{store url=""}}/">{{var store.name}}</a></p>
+<p>Thanks for shopping with us!</p>]]>
+        </content>
+        <email_send_days>2</email_send_days>
+        <email_send_hours>23</email_send_hours>
+    </event>
+
+    <event>
+        <event_type>abandoned_checkout</event_type>
+        <name>[Coupon] Last call (71 hours)</name>
+        <subject>A coupon for your cart at {{var store.name}}!</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer.firstname}},</h3>
+<p>We can see that the cart you’ve left at our store is still awaiting your decision, so we decided to try and tip the scale in our favor. Coupon code below provides you with an attractive discount on cart items, but only if used within the next 24 hours!</p>
+<p><strong style="text-transform: uppercase;">Coupon code:</strong> TEST</p>
+<p><strong style="text-transform: uppercase;">Cart items:</strong></p>
+<ul>
+{{for item in quote.getAllVisibleItems()}}
+<li>{{var item.qty}} x <a href="{{store url="catalog/product/view" id="$item.product_id"}}">{{var item.name}}</a></li>
+{{/for}}
+</ul>
+<p><strong style="text-transform: uppercase;">Cart subtotal:</strong> {{var quote.subtotal|formatPrice}}</p>
+<p>Follow this link to complete the purchase: <a href="{{store url=""}}/">{{var store.name}}</a></p>
+<p>Hurry up!</p>]]>
+        </content>
+        <email_send_days>2</email_send_days>
+        <email_send_hours>23</email_send_hours>
+    </event>
+    <event>
+        <event_type>order_status_changed</event_type>
+        <name>Review request (14 days)</name>
+        <subject>Did you enjoy that thing from {{var store.name}}?</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer_firstname}},</h3>
+<p>Thanks again for shopping at {{var store.name}}, we really appreciate your business!</p>
+<p>Hopefully you had the chance to try the items we shipped and already have some experiences to share. Your feedback will help our team to improve the selection of items we carry, while our customers will be happy to hear from someone who tried the product first hand.</p>
+<p>The items you purchased may be found here:</p>
+<ul>
+{{for item in order.getAllVisibleItems()}}
+<li>{{var item.qty_ordered|formatDecimal}} x <a href="{{store url="catalog/product/view" id="$item.product_id"}}">{{var item.name}}</a></li>
+{{/for}}
+</ul>
+<p>We’d appreciate it if you found the time to leave a review and we hope that you choose {{var store.name}} for your future purchases!</p>]]>
+        </content>
+        <order_statuses>complete</order_statuses>
+        <email_send_days>14</email_send_days>
+    </event>
+    <event>
+        <event_type>order_status_changed</event_type>
+        <name>Consumable (30 days)</name>
+        <subject>A little extra for your next order at {{var store.name}}</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer_firstname}},</h3>
+<p>You must be running low on the supplies you got from {{var store.name}}  last month and we hope you choose our store for your next batch. As a little incentive we include a single use coupon giving you a 5% discount on your next order!</p>
+<p><strong style="text-transform: uppercase;">Coupon code:</strong> TEST</p>
+<p>Thanks for shopping at {{var store.name}}!</p>]]>
+        </content>
+        <order_statuses>complete</order_statuses>
+        <email_send_days>30</email_send_days>
+    </event>
+    <event>
+        <event_type>order_status_changed</event_type>
+        <name>Complementary (14 days)</name>
+        <subject>See what else we’ve got at {{var store.name}}</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer_firstname}},</h3>
+<p>Thanks again for choosing our store, we really appreciate your business!</p>
+<p>We hope you had a chance to try everything out and you are happy with your purchase! Keep in mind that we carry a selection of complementary items that might take your experience a couple levels up ;)</p>
+<p>Feel free to visit {{var store.name}}  and see what else we got!</p>]]>
+        </content>
+        <order_statuses>complete</order_statuses>
+        <email_send_days>14</email_send_days>
+    </event>
+    <event>
+        <event_type>customer_registration</event_type>
+        <name>New registration (2 days)</name>
+        <subject>Welcome to {{var store.name}}</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer.firstname}},</h3>
+<p>We are happy you have chosen {{var store.name}} and we hope that you can find everything you need at our store!</p>
+<p>Feel free to contact us should you require any assistance and our team will help you out.</p>
+<p>Enjoy shopping at {{var store.name}}!</p>]]>
+        </content>
+        <email_send_days>2</email_send_days>
+    </event>
+    <event>
+        <event_type>customer_last_activity</event_type>
+        <name>[Lighter] Long time no see (30 days)</name>
+        <subject>Invitation from {{var store.name}}</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi, {{var customer.firstname}},</h3>
+<p>You haven’t been around for a while and we hope it’s nothing we did. Meanwhile we got some new stuff, came up with some new promos, and put a bunch of items on discount.</p>
+<p>Hopefully you’ll find the time to stop by  {{var store.name}}  and see for yourself!</p>]]>
+        </content>
+        <email_send_days>30</email_send_days>
+    </event>
+    <event>
+        <event_type>customer_last_activity</event_type>
+        <name>[Light] Long time no see (30 days)</name>
+        <subject>Invitation from {{var store.name}}</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi, {{var customer.firstname}},</h3>
+<p>We haven’t seen you in a while and we hope you are doing well.</p>
+<p>We know we are! There are some new items in our store, some other items are on discount, and some attractive promos are waiting to be taken advantage of!</p>
+<p>Visit {{var store.name}} and see for yourself!</p>
+<p>Hope to see you around some time soon!</p>]]>
+        </content>
+        <email_send_days>30</email_send_days>
+    </event>
+    <event>
+        <event_type>customer_birthday</event_type>
+        <name>Happy Birthday (in 1 day)</name>
+        <subject>Happy Birthday!</subject>
+        <content><![CDATA[<h3 style="color:#073763;">Hi {{var customer.firstname}},</h3>
+<p>We wish you a Happy Birthday and we intend to make it a little happier with this exclusive B-day discount from {{var store.name}}!</p>
+<p>Use the coupon below to treat yourself on a special day!</p>
+<p><strong style="text-transform: uppercase;">Coupon code:</strong> TEST</p>
+<p>That’s it, we’ll get out of your hair now and let you celebrate :)</p>]]>
+        </content>
+        <email_send_days>1</email_send_days>
+    </event>
+</config>

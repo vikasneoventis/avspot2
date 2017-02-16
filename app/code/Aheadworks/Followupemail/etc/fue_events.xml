@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="fue_events.xsd">
+    <event type="abandoned_checkout">
+        <enabled>true</enabled>
+        <title>Abandoned Checkout</title>
+        <description>We recommend sending several consecutive emails, increasing the pressure as more time goes by. You may start by asking the client whether something went wrong and offering some alternatives and finish off with a limited time discount offer.</description>
+        <model>\Aheadworks\Followupemail\Model\Event\Type\AbandonedCheckout</model>
+        <customer_conditions>true</customer_conditions>
+        <cart_conditions>true</cart_conditions>
+        <product_conditions>true</product_conditions>
+    </event>
+    <event type="order_status_changed">
+        <enabled>true</enabled>
+        <title>Order Status Changed</title>
+        <description>Pick any status changes that might require customer attention. Notify the customer about the failed payment, or let him know his order has been shipped out, or wait a couple weeks and ask a customer to provide a product review for your store.</description>
+        <model>\Aheadworks\Followupemail\Model\Event\Type\OrderStatusChanged</model>
+        <customer_conditions>true</customer_conditions>
+        <cart_conditions>true</cart_conditions>
+        <product_conditions>true</product_conditions>
+        <order_statuses_condition>true</order_statuses_condition>
+        <allowed_for_guests>true</allowed_for_guests>
+    </event>
+    <event type="customer_registration">
+        <enabled>true</enabled>
+        <title>Customer Registration</title>
+        <description>Think of this as being a good host. Welcome a client, show where everything is, suggest some starting points, offer something on the house, and remind your client to ask for help should anything come up.</description>
+        <model>\Aheadworks\Followupemail\Model\Event\Type\CustomerRegistration</model>
+    </event>
+    <event type="customer_last_activity">
+        <enabled>true</enabled>
+        <title>Last Customer Activity</title>
+        <description>Long time no see? Perhaps a gentle reminder about a new collection or a promo coupon might encourage some your customers to come around.</description>
+        <model>\Aheadworks\Followupemail\Model\Event\Type\CustomerLastActivity</model>
+        <customer_conditions>true</customer_conditions>
+    </event>
+    <event type="customer_birthday">
+        <enabled>true</enabled>
+        <title>Customer Birthday</title>
+        <description>Schedule the birthday email for the customer with a coupon code or a limited offer and include a store link with a motivational birthday greeting.</description>
+        <model>\Aheadworks\Followupemail\Model\Event\Type\CustomerBirthday</model>
+        <customer_conditions>true</customer_conditions>
+    </event>
+</config>

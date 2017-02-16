@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="followupemail_admin_default"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Followupemail\Block\Adminhtml\Breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+            <block class="Aheadworks\Followupemail\Block\Adminhtml\Event" name="aheadworks_followupemail_events_container" template="event/container.phtml">
+               <block class="Aheadworks\Followupemail\Block\Adminhtml\Event\Home" name="aheadworks_followupemail_events" template="event/home.phtml" as="home" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

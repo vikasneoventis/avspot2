@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <update handle="followupemail_admin_default"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Followupemail\Block\Adminhtml\Event\Edit" name="aheadworks_followupemail_event_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Aheadworks\Followupemail\Block\Adminhtml\Event\Edit\Tabs" name="aheadworks_followupemail_event_edit_tabs">
+                <block class="Aheadworks\Followupemail\Block\Adminhtml\Event\Edit\Tab\Info" name="aheadworks_followupemail_event_edit_tab_info"/>
+                <block class="Aheadworks\Followupemail\Block\Adminhtml\Event\Edit\Tab\Conditions" name="aheadworks_followupemail_event_edit_tab_conditions"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">info_section</argument>
+                    <argument name="block" xsi:type="string">aheadworks_followupemail_event_edit_tab_info</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">conditions_section</argument>
+                    <argument name="block" xsi:type="string">aheadworks_followupemail_event_edit_tab_conditions</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

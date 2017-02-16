@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="followupemail_admin_default"/>
+    <body>
+        <referenceContainer name="admin.scope.col.wrap" htmlClass="admin__old" />
+        <referenceContainer name="content">
+            <uiComponent name="queue_listing"/>
+            <block class="Magento\Backend\Block\Template" name="followupemail_queue_preview_js_init" as="followupemail_queue_preview_js_init" template="Aheadworks_Followupemail::queue/preview_init.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

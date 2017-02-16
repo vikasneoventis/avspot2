@@ -1,0 +1,166 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+
+/**
+ * @var \Aheadworks\Followupemail\Block\Adminhtml\Event\Grid $block
+ */
+$numColumns = sizeof($block->getColumns());
+?>
+<?php if ($block->getCollection()): ?>
+    <?php if ($block->canDisplayContainer()): ?>
+
+    <div id="<?php echo $block->getId() ?>" data-grid-id="<?php echo $block->getId() ?>">
+        <?php else: ?>
+            <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+        <?php endif; ?>
+
+        <div class="admin__data-grid-header admin__data-grid-toolbar">
+            <div class="admin__data-grid-header-row">
+                <?php if ($block->getPagerVisibility() && $block->getCollection()->getLastPageNumber() > 1): ?>
+                    <div class="admin__data-grid-pager-wrap">
+                        <select name="<?php /* @escapeNotVerified */ echo $block->getVarNameLimit() ?>"
+                                id="<?php echo $block->escapeHTML($block->getHtmlId())?>_page-limit"
+                                onchange="<?php /* @escapeNotVerified */ echo $block->getJsObjectName() ?>.loadByElement(this)"
+                                class="admin__control-select">
+                            <option value="<?php echo $block::LIMIT_PER_PAGE_20 ?>"<?php if ($block->getCollection()->getPageSize() == $block::LIMIT_PER_PAGE_20): ?>
+                                selected="selected"<?php endif; ?>><?php echo $block::LIMIT_PER_PAGE_20 ?>
+                            </option>
+                            <option value="<?php echo $block::LIMIT_PER_PAGE_30 ?>"<?php if ($block->getCollection()->getPageSize() == $block::LIMIT_PER_PAGE_30): ?>
+                                selected="selected"<?php endif; ?>><?php echo $block::LIMIT_PER_PAGE_30 ?>
+                            </option>
+                            <option value="<?php echo $block::LIMIT_PER_PAGE_50 ?>"<?php if ($block->getCollection()->getPageSize() == $block::LIMIT_PER_PAGE_50): ?>
+                                selected="selected"<?php endif; ?>><?php echo $block::LIMIT_PER_PAGE_50 ?>
+                            </option>
+                            <option value="<?php echo $block::LIMIT_PER_PAGE_100 ?>"<?php if ($block->getCollection()->getPageSize() == $block::LIMIT_PER_PAGE_100): ?>
+                                selected="selected"<?php endif; ?>><?php echo $block::LIMIT_PER_PAGE_100 ?>
+                            </option>
+                            <option value="<?php echo $block::LIMIT_PER_PAGE_200 ?>"<?php if ($block->getCollection()->getPageSize() == $block::LIMIT_PER_PAGE_200): ?>
+                                selected="selected"<?php endif; ?>><?php echo $block::LIMIT_PER_PAGE_200 ?>
+                            </option>
+                        </select>
+                        <label for="<?php echo $block->escapeHTML($block->getHtmlId())?><?php echo $block->escapeHTML($block->getHtmlId())?>_page-limit"
+                               class="admin__control-support-text"><?php /* @escapeNotVerified */ echo __('per page') ?></label>
+
+                        <div class="admin__data-grid-pager">
+                            <?php $_curPage = $block->getCollection()->getCurPage() ?>
+                            <?php $_lastPage = $block->getCollection()->getLastPageNumber() ?>
+                            <?php if ($_curPage > 1): ?>
+                                <button class="action-previous"
+                                        type="button"
+                                        onclick="<?php echo $block->getJsObjectName() ?>.setPage('<?php echo($_curPage - 1) ?>');return false;">
+                                    <span><?php echo __('Previous page') ?></span>
+                                </button>
+                            <?php else: ?>
+                                <button type="button" class="action-previous disabled"><span><?php echo __('Previous page') ?></span></button>
+                            <?php endif; ?>
+                            <input type="text"
+                                   id="<?php echo $block->escapeHTML($block->getHtmlId())?>_page-current"
+                                   name="<?php echo $block->getVarNamePage() ?>"
+                                   value="<?php echo $_curPage ?>"
+                                   class="admin__control-text"
+                                   onkeypress="<?php echo $block->getJsObjectName() ?>.inputPage(event, '<?php echo $_lastPage ?>')" <?php echo $block->getUiId('current-page') ?> />
+                            <label class="admin__control-support-text" for="<?php echo $block->escapeHTML($block->getHtmlId())?>_page-current">
+                                <?php echo __('of %1', '<span>' . $block->getCollection()->getLastPageNumber() . '</span>') ?>
+                            </label>
+                            <?php if ($_curPage < $_lastPage): ?>
+                                <button type="button"
+                                        title="<?php echo __('Next page') ?>"
+                                        class="action-next"
+                                        onclick="<?php echo $block->getJsObjectName() ?>.setPage('<?php echo($_curPage + 1) ?>');return false;">
+                                    <span><?php echo __('Next page') ?></span>
+                                </button>
+                            <?php else: ?>
+                                <button type="button" class="action-next disabled"><span><?php echo __('Next page') ?></span></button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+
+        <div class="aheadworks-fue-grid-wrap">
+            <table class="data-grid" id="<?php echo $block->getId() ?>_table">
+                <?php if ($block->getHeadersVisibility()): ?>
+                    <thead>
+                    <?php if ($block->getHeadersVisibility()): ?>
+                        <tr>
+                            <?php foreach ($block->getColumns() as $_column): ?>
+                                <?php if ($_column->getHeaderHtml() == '&nbsp;'):?>
+                                    <th class="data-grid-th" data-column="<?php echo $_column->getId() ?>"
+                                        <?php echo $_column->getHeaderHtmlProperty() ?>>&nbsp;</th>
+                                <?php else: ?>
+                                    <?php echo $_column->getHeaderHtml()?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endif; ?>
+                    </thead>
+                <?php endif; ?>
+
+                <tbody>
+                <?php if (($block->getCollection()->getSize() > 0) && (!$block->getIsCollapsed())): ?>
+                    <?php foreach ($block->getCollection() as $_index => $_item): ?>
+                        <tr <?php if ($block->isRowDisabled($_item)): ?>class="event-disabled"<?php endif; ?>>
+                            <?php
+                            $i = 0;
+                            foreach ($block->getColumns() as $_column):
+                                if ($block->shouldRenderCell($_item, $_column)):?>
+                                <td class="<?php echo $_column->getCssProperty() ?>">
+                                    <?php echo(($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;') ?>
+                                </td>
+                                    <?php if ($block->shouldRenderEmptyCell($_item, $_column)): ?>
+                                        <td class="last"><?php echo $block->getEmptyCellLabel() ?></td>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php elseif ($block->getEmptyText()): ?>
+                    <tr class="data-grid-tr-no-data">
+                        <td class="<?php echo $block->getEmptyTextClass() ?>"
+                            colspan="<?php echo $numColumns ?>"><?php echo $block->getEmptyText() ?></td>
+                    </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+
+        </div>
+        <?php if ($block->canDisplayContainer()): ?>
+    </div>
+    <script>
+        var deps = [];
+
+        deps.push('mage/adminhtml/grid');
+
+        require(deps, function(<?php echo ($block->getDependencyJsObject() ? 'registry' : '') ?>){
+            <?php echo $block->getJsObjectName() ?> = new varienGrid('<?php echo $block->escapeHtml($block->getId()) ?>', '<?php echo $block->getGridUrl() ?>', '<?php echo $block->getVarNamePage() ?>', '<?php echo $block->getVarNameSort() ?>', '<?php echo $block->getVarNameDir() ?>', '<?php echo $block->getVarNameFilter() ?>');
+            <?php echo $block->getJsObjectName() ?>.useAjax = <?php echo $block->getUseAjax() ? 'true' : 'false' ?>;
+            <?php if ($block->getRowClickCallback()): ?>
+            <?php echo $block->getJsObjectName() ?>.rowClickCallback = <?php echo $block->getRowClickCallback() ?>;
+            <?php endif; ?>
+            <?php if ($block->getCheckboxCheckCallback()): ?>
+            <?php echo $block->getJsObjectName() ?>.checkboxCheckCallback = <?php echo $block->getCheckboxCheckCallback() ?>;
+            <?php endif; ?>
+            <?php if ($block->getSortableUpdateCallback()): ?>
+            <?php echo $block->getJsObjectName() ?>.sortableUpdateCallback = <?php echo $block->getSortableUpdateCallback()?>;
+            <?php endif; ?>
+            <?php echo $block->getJsObjectName() ?>.bindSortable();
+            <?php if ($block->getRowInitCallback()): ?>
+            <?php echo $block->getJsObjectName() ?>.initRowCallback = <?php echo $block->getRowInitCallback() ?>;
+            <?php echo $block->getJsObjectName() ?>.initGridRows();
+            <?php endif; ?>
+            <?php if ($block->getChildBlock('grid.massaction') && $block->getChildBlock('grid.massaction')->isAvailable()): ?>
+            <?php echo $block->getChildBlock('grid.massaction')->getJavaScript() ?>
+            <?php endif ?>
+            <?php echo $block->getAdditionalJavaScript(); ?>
+
+            <?php if ($block->getDependencyJsObject()): ?>
+        });
+        <?php endif; ?>
+        });
+    </script>
+<?php endif; ?>
+<?php endif ?>

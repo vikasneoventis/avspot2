@@ -1,0 +1,17 @@
+<?php
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+?>
+<script>
+    require(['jquery', 'uiRegistry'], function($, registry){
+        $(document).ready(function() {
+            registry.set('preview', {
+                preview: function(actionIndex, recordId, action) {
+                    window.open(action.href, '_blank', 'resizable, scrollbars, status, top=0, left=0, width=600, height=500');
+                }
+            });
+        });
+    });
+</script>

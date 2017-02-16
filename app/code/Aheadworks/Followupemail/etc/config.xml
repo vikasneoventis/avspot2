@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2016 aheadWorks. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Store/etc/config.xsd">
+    <default>
+        <followupemail>
+            <general>
+                <sender>general</sender>
+                <enabletestmode>0</enabletestmode>
+            </general>
+            <maillog>
+                <keepfor>60</keepfor>
+            </maillog>
+        </followupemail>
+    </default>
+</config>
