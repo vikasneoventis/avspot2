@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <signifyd>
+            <general>
+                <enabled>1</enabled>
+                <key> </key>
+            </general>
+            <advanced>
+                <guarantee_negative_action>nothing</guarantee_negative_action>
+                <guarantee_positive_action>nothing</guarantee_positive_action>
+            </advanced>
+            <logs>
+                <log>1</log>
+            </logs>
+        </signifyd>
+    </default>
+</config>
