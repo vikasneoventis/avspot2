@@ -1,0 +1,69 @@
+<?php
+/*
+ * Copyright © 2015 Wyomind. All rights reserved.
+ * See LICENSE.txt for license details.
+*/
+?>
+<!--
+  Categories tree view template
+-->
+
+
+<div class='entry-edit form-inline'>
+    <fieldset id="filter_fieldset" class="fieldset ">
+        <legend class="legend">
+            <span><?php echo __('Category filter type'); ?></span>
+        </legend>
+        <br>
+        <div>
+            <input type='radio' value='0' name='category_filter' class='category_filter' id="category_filter_0" /><label><?php echo __("<b>Exclude</b> all products from the selected categories."); ?></label><br/>
+            <input type='radio' value='1' name='category_filter' class='category_filter' id="category_filter_1" /><label><?php echo __("<b>Include</b> all products from the selected categories."); ?></label><br/>
+            <br/><b><?php echo __("Based on "); ?></b><br/><br/>
+            <input type="radio" value="0" name='category_type' class='category_type' id="category_type_0"/><label><?php echo __("<b>Product</b> categories only"); ?></label><br/>
+            <input type="radio" value="1" name='category_type' class='category_type' id="category_type_1"/><label><?php echo __("<b>Product and parent</b> categories"); ?></label><br/>
+            <input type="radio" value="2" name='category_type' class='category_type' id="category_type_2"/><label><?php echo __("<b>Parent</b> categories only"); ?></label><br/>                    
+        </div>
+    </fieldset>
+
+    <fieldset id="category-selector" class="fieldset ">
+        <legend class="legend">
+            <span><?php echo __('Category selection and mapping'); ?></span>
+        </legend>
+
+        <div id="taxonomy-box">
+
+            <b><?php echo __("Google Taxonomy source : ") ?></b>  
+            <select id="taxonomy" name='taxonomy'>
+                <?php
+                $array = $block->getAvailableTaxonomies();
+
+                foreach ($array as $key => $file) {
+                    if ($block->getFeedTaxonomy() == $file) {
+                        $selected = "selected";
+                    } else {
+                        $selected = "";
+                    }
+                    echo "<option value='".$file . "' $selected>" . basename(str_replace('.txt', null, $file)) . "</option>";
+                }
+                ?> 
+
+            </select> 
+
+        </div>
+
+        <br>
+        <span id='note' style='margin-left:10px;'>
+        <?php echo __("* If you do not select any category, all products will be exported"); ?>
+        </span>
+        <div class="category-selector">
+            <?php
+            echo $block->categoriesLoop($block->getCategoriesJson());
+            ?>
+            <div class="mapping-dropdown" id="mapping-dropdown"></div>
+        </div>
+
+    </fieldset>
+
+</div>
+
+
